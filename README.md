@@ -69,19 +69,18 @@ Dataset dibaca menggunakan Pandas.
 baca = pd.read_csv('go_track_tracks.csv')
 ```
 
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/5cbde381-ff3e-4267-b13c-aea37bd0eca4" />
+
 ---
 
 ### 3. Data Understanding
-Dilakukan pengecekan:
-- Struktur dataset
-- Tipe data
-- Missing values
-- Statistik deskriptif
 
 ```python
 baca.info()
-baca.describe()
 ```
+
+<img width="350" alt="image" src="https://github.com/user-attachments/assets/e062177f-2d58-4d31-9a74-434307f399ab" />
+
 
 ---
 
@@ -92,9 +91,22 @@ Kolom yang memiliki banyak missing value atau tidak diperlukan dihapus.
 baca = baca.drop(columns=['linha'])
 ```
 
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/9dc8aa9b-aa52-4c0c-b900-611844f76fcf" />
+
+
 ---
 
 ### 5. Feature Selection
+
+Memvisualkan persebaran data
+
+```python
+plt.scatter(baca.distance, baca.speed, s =10, c = "red", marker = "o", alpha = 0.5)
+plt.show()
+```
+
+<img width="350" alt="output" src="https://github.com/user-attachments/assets/82d11079-7403-4829-86fe-12db3c720435" />
+
 Fitur yang digunakan untuk clustering:
 
 ```python
@@ -104,15 +116,7 @@ x_array = np.array(baca_x)
 print(x_array)
 ```
 
-Memvisualkan persebaran data
-
-```python
-plt.scatter(baca.distance, baca.speed, s =10, c = "red", marker = "o", alpha = 0.5)
-plt.show()
-```
-
-<img width="552" height="415" alt="output" src="https://github.com/user-attachments/assets/82d11079-7403-4829-86fe-12db3c720435" />
-
+<img width="150" alt="image" src="https://github.com/user-attachments/assets/36868648-aeb5-4d6b-9d90-38ec976b358b" /> 
 
 ---
 
@@ -123,6 +127,8 @@ Normalisasi dilakukan menggunakan MinMaxScaler agar skala data seragam.
 scaler = MinMaxScaler()
 x_scaled = scaler.fit_transform(x_array)
 ```
+
+<img width="150" alt="image" src="https://github.com/user-attachments/assets/d2ace2db-839e-417b-a036-655773bc83fd" />
 
 ---
 
@@ -136,6 +142,8 @@ cluster = kmeans.fit_predict(baca)
 baca['cluster'] = kmeans.labels_
 ```
 
+<img width="350" alt="image" src="https://github.com/user-attachments/assets/59a6708e-b58f-441f-ba87-effd379b3205" />
+
 ---
 
 ### 8. Evaluasi Model
@@ -145,6 +153,8 @@ Evaluasi dilakukan menggunakan Silhouette Score.
 sil_score = silhouette_score(baca, kmeans.labels_)
 print(f"Silhouette Score      : {sil_score:.4f}")
 ```
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/52f7c1d6-8e7d-4a48-96dc-c20805cf5154" />
+
 
 Semakin mendekati 1, maka kualitas cluster semakin baik.
 
@@ -180,7 +190,7 @@ plt.legend()
 plt.show()
 ```
 
-<img width="695" height="547" alt="output2" src="https://github.com/user-attachments/assets/58621dd6-f53b-44a1-b74a-ebb65dfb9717" />
+<img width="350" alt="output2" src="https://github.com/user-attachments/assets/58621dd6-f53b-44a1-b74a-ebb65dfb9717" />
 
 
 ---
